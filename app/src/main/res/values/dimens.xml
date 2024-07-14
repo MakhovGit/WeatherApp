@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Commons begin -->
+    <dimen name="spacer_10">10dp</dimen>
+    <dimen name="spacer_20">20dp</dimen>
+    <dimen name="spacer_30">30dp</dimen>
+    <dimen name="common_padding">20dp</dimen>
+    <dimen name="card_rounded_corner">20dp</dimen>
+    <dimen name="button_rounded_corner">10dp</dimen>
+    <!-- Commons end -->
+
+    <!-- DailyWeatherItem begin -->
+    <dimen name="daily_weather_item_padding">15dp</dimen>
+    <dimen name="daily_weather_item_divider_height">45dp</dimen>
+    <dimen name="daily_weather_item_icon_size">60dp</dimen>
+    <dimen name="daily_weather_item_icon_padding">10dp</dimen>
+    <!-- DailyWeatherItem end -->
+
+    <!-- HourlyWeatherInfo begin -->
+    <dimen name="hourly_weather_info_lazy_row_padding">10dp</dimen>
+    <!-- HourlyWeatherInfo end -->
+
+    <!-- HourlyWeatherItem begin -->
+    <dimen name="hourly_weather_item_time_font_size">13sp</dimen>
+    <dimen name="hourly_weather_item_icon_size">40dp</dimen>
+    <!-- HourlyWeatherItem end -->
+
+    <!-- MainWeatherInfo begin -->
+    <dimen name="main_weather_info_place_font_size">17sp</dimen>
+    <dimen name="main_weather_info_temp_font_size">60sp</dimen>
+    <!-- MainWeatherInfo end -->
+
+    <!-- PrecipitationInfo begin -->
+    <dimen name="precipitation_info_padding">10dp</dimen>
+    <!-- PrecipitationInfo end -->
+
+    <!-- PrecipitationItem begin -->
+    <dimen name="precipitation_item_bar_height">30dp</dimen>
+    <!-- PrecipitationItem end -->
+
+    <!-- Search begin -->
+    <dimen name="search_elevation">10dp</dimen>
+    <!-- Search end -->
+
+</resources>

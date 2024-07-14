@@ -1,3 +1,22 @@
 <resources>
+
+    <!-- Commons begin -->
     <string name="app_name">Прогноз погоды</string>
+    <string name="search_placeholder">Поиск города</string>°
+    <string name="search_icon_content_description">Иконка поиска</string>
+    <string name="weather_icon_content_description">Иконка погоды</string>
+    <string name="degree">°</string>
+    <string name="percent">%</string>
+    <!-- Commons end -->
+
+    <!-- RowOfButtons begin -->
+    <string name="button_today">Сегодня</string>
+    <string name="button_tomorrow">Завтра</string>
+    <string name="button_10days">10 дней</string>
+    <!-- RowOfButtons end -->
+
+    <!-- PrecipitationInfo begin -->
+    <string name="precipitation_probability">Вероятность осадков</string>
+    <!-- PrecipitationInfo end -->
+
 </resources>
