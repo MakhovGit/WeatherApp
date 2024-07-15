@@ -1,4 +1,4 @@
-package com.pogoda.app.ru.model
+package com.pogoda.app.ru.model.weather
 
 import com.pogoda.app.ru.utils.EMPTY
 import com.pogoda.app.ru.utils.ZERO
