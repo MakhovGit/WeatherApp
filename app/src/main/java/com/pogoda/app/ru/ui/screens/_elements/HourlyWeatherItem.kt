@@ -20,7 +20,7 @@ import com.pogoda.app.ru.R
 import com.pogoda.app.ru.utils.VerticalSpacer
 
 @Composable
-fun HourlyWeatherItem(time: String, @DrawableRes icon: Int, temp: String) {
+fun HourlyWeatherItem(time: String, @DrawableRes icon: Int, temperature: String) {
     Box(
         contentAlignment = Alignment.Center
     ) {
@@ -42,7 +42,7 @@ fun HourlyWeatherItem(time: String, @DrawableRes icon: Int, temp: String) {
             )
             VerticalSpacer(dimensionResource(id = R.dimen.spacer_10))
             Text(
-                text = temp + stringResource(id = R.string.degree),
+                text = temperature,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )

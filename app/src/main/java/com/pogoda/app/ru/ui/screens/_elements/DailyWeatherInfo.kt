@@ -8,18 +8,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.pogoda.app.ru.R
+import com.pogoda.app.ru.model.weather.DailyWeatherInfo
 
 @Composable
-fun DailyWeatherInfo() {
+fun DailyWeatherInfo(
+    dailyWeatherInfo: List<DailyWeatherInfo>
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_20)),
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = dimensionResource(id = R.dimen.common_padding))
     ) {
-        repeat(20) {
+        dailyWeatherInfo.forEachIndexed { index, dailyWeather ->
             item {
-                DailyWeatherItem()
+                DailyWeatherItem(dailyWeather, index)
             }
         }
     }

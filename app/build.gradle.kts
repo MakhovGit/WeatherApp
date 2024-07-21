@@ -69,6 +69,13 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.koin.coroutines)
 
+    // Google play services
+    implementation(libs.google.play.services)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converterGson)
+
     // Tests
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

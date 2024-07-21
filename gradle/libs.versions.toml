@@ -9,6 +9,8 @@ lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 koin-bom = "3.5.6"
+play-services = "21.3.0"
+retrofit = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +32,9 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-bom" }
 koin-coroutines = { group = "io.insert-koin", name = "koin-core-coroutines", version.ref = "koin-bom" }
+google-play-services = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

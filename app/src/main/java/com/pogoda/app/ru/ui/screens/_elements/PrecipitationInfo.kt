@@ -19,13 +19,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.pogoda.app.ru.R
+import com.pogoda.app.ru.model.weather.HourlyWeatherInfo
 import com.pogoda.app.ru.ui.theme.InterfaceBlockColor
+import com.pogoda.app.ru.utils.FOUR
 import com.pogoda.app.ru.utils.HorizontalSpacer
 import com.pogoda.app.ru.utils.MAX_WEIGHT
 import com.pogoda.app.ru.utils.VerticalSpacer
 
 @Composable
-fun PrecipitationInfo() {
+fun PrecipitationInfo(
+    todayHourlyWeather: List<HourlyWeatherInfo>
+) {
     Surface(
         color = InterfaceBlockColor,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_rounded_corner)),
@@ -60,9 +64,15 @@ fun PrecipitationInfo() {
                     dimensionResource(id = R.dimen.spacer_10)
                 )
             ) {
-                repeat(4) {
-                    item {
-                        PrecipitationItem(precipitation = Pair("10:00", 40))
+                todayHourlyWeather.forEachIndexed { index, hourlyWeather ->
+                    if (index < Int.FOUR) {
+                        item {
+                            PrecipitationItem(
+                                time = hourlyWeather.time,
+                                probability = hourlyWeather.precipitationProbability,
+                                probabilityUnit = hourlyWeather.probabilityUnit
+                            )
+                        }
                     }
                 }
             }

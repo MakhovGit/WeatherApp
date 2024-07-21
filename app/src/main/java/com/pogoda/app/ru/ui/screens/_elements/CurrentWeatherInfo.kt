@@ -18,17 +18,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.pogoda.app.ru.R
+import com.pogoda.app.ru.model.weather.CurrentWeatherInfo
 import com.pogoda.app.ru.utils.MAX_WEIGHT
+import com.pogoda.app.ru.utils.SPACE
 import com.pogoda.app.ru.utils.VerticalSpacer
 
 @Composable
-fun MainWeatherInfo() {
+fun CurrentWeatherInfo(
+    currentWeather: CurrentWeatherInfo
+) {
     Box {
         Column {
             Text(
                 textAlign = TextAlign.Start,
-                text = "Москва, Россия",
-                fontSize = dimensionResource(id = R.dimen.main_weather_info_place_font_size).value.sp,
+                text = currentWeather.place,
+                fontSize = dimensionResource(id = R.dimen.current_weather_info_place_font_size).value.sp,
                 modifier = Modifier.fillMaxWidth(),
             )
             VerticalSpacer(dimensionResource(id = R.dimen.spacer_10))
@@ -38,19 +42,20 @@ fun MainWeatherInfo() {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "3" + stringResource(id = R.string.degree),
+                    text = currentWeather.temperature,
                     fontWeight = FontWeight.Bold,
-                    fontSize = dimensionResource(id = R.dimen.main_weather_info_temp_font_size).value.sp,
+                    fontSize = dimensionResource(id = R.dimen.current_weather_info_temp_font_size).value.sp,
                     modifier = Modifier.alignByBaseline()
                 )
                 Text(
-                    text = "ощущается как -2" + stringResource(id = R.string.degree),
+                    text = stringResource(id = R.string.current_weather_info_apparent) + String.SPACE +
+                            currentWeather.apparentTemperature,
                     modifier = Modifier
                         .alignByBaseline()
                         .weight(Float.MAX_WEIGHT)
                 )
                 Icon(
-                    painter = painterResource(R.drawable.weather_08),
+                    painter = painterResource(currentWeather.icon),
                     contentDescription = stringResource(id = R.string.weather_icon_content_description),
                     tint = Color.Unspecified,
                     modifier = Modifier.alignByBaseline()

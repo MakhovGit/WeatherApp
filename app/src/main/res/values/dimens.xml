@@ -10,11 +10,17 @@
     <dimen name="button_rounded_corner">10dp</dimen>
     <!-- Commons end -->
 
+    <!-- MainScreen begin -->
+    <dimen name="main_screen_search_elevation">10dp</dimen>
+    <!-- MainScreen end -->
+
     <!-- DailyWeatherItem begin -->
     <dimen name="daily_weather_item_padding">15dp</dimen>
     <dimen name="daily_weather_item_divider_height">45dp</dimen>
     <dimen name="daily_weather_item_icon_size">60dp</dimen>
     <dimen name="daily_weather_item_icon_padding">10dp</dimen>
+    <dimen name="daily_weather_item_date_font_size">13sp</dimen>
+    <dimen name="daily_weather_item_description_font_size">14sp</dimen>
     <!-- DailyWeatherItem end -->
 
     <!-- HourlyWeatherInfo begin -->
@@ -26,10 +32,10 @@
     <dimen name="hourly_weather_item_icon_size">40dp</dimen>
     <!-- HourlyWeatherItem end -->
 
-    <!-- MainWeatherInfo begin -->
-    <dimen name="main_weather_info_place_font_size">17sp</dimen>
-    <dimen name="main_weather_info_temp_font_size">60sp</dimen>
-    <!-- MainWeatherInfo end -->
+    <!-- CurrentWeatherInfo begin -->
+    <dimen name="current_weather_info_place_font_size">17sp</dimen>
+    <dimen name="current_weather_info_temp_font_size">50sp</dimen>
+    <!-- CurrentWeatherInfo end -->
 
     <!-- PrecipitationInfo begin -->
     <dimen name="precipitation_info_padding">10dp</dimen>
@@ -37,10 +43,12 @@
 
     <!-- PrecipitationItem begin -->
     <dimen name="precipitation_item_bar_height">30dp</dimen>
+    <dimen name="precipitation_item_probability_min_width">40dp</dimen>
     <!-- PrecipitationItem end -->
 
     <!-- Search begin -->
-    <dimen name="search_elevation">10dp</dimen>
+    <dimen name="search_max_menu_height">200dp</dimen>
+    <dimen name="search_menu_item_content_padding_vertical">5dp</dimen>
     <!-- Search end -->
 
 </resources>

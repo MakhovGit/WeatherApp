@@ -13,6 +13,7 @@ val Pink40 = Color(0xFF7D5260)
 val MainBackgroundColor = Color(0xFFEDF7FF)
 val AltBackgroundColor = Color(0xFFD6EDFF)
 val SearchStringColor = Color(0xFFFDFDFD)
+val SearchStringIndicatorColor = Color(0x00FFFFFF)
 val SearchStringPlaceHolderColor = Color.Gray
 val SearchStringIconColor = Color.Gray
 val ButtonNotPressedColor = Color.White

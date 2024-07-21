@@ -2,21 +2,56 @@
 
     <!-- Commons begin -->
     <string name="app_name">Прогноз погоды</string>
-    <string name="search_placeholder">Поиск города</string>°
+    <string name="search_placeholder">Поиск города</string>
     <string name="search_icon_content_description">Иконка поиска</string>
     <string name="weather_icon_content_description">Иконка погоды</string>
-    <string name="degree">°</string>
-    <string name="percent">%</string>
+    <string name="address_icon_content_description">Иконка адреса</string>
     <!-- Commons end -->
 
-    <!-- RowOfButtons begin -->
+    <!-- MainScreen begin -->
     <string name="button_today">Сегодня</string>
     <string name="button_tomorrow">Завтра</string>
     <string name="button_10days">10 дней</string>
-    <!-- RowOfButtons end -->
+    <!-- MainScreen end -->
 
     <!-- PrecipitationInfo begin -->
     <string name="precipitation_probability">Вероятность осадков</string>
     <!-- PrecipitationInfo end -->
+
+    <!-- CurrentWeatherInfo begin -->
+    <string name="current_weather_info_apparent">ощущается как</string>
+    <!-- CurrentWeatherInfo end -->
+
+    <!-- Weather codes begin -->
+    <string name="weather_code_0">Чистое небо</string>
+    <string name="weather_code_1">Преимущественно ясно</string>
+    <string name="weather_code_2">Переменная облачность</string>
+    <string name="weather_code_3">Пасмурно</string>
+    <string name="weather_code_45">Туман</string>
+    <string name="weather_code_48">Оседающая изморозь</string>
+    <string name="weather_code_51">Слабая морось</string>
+    <string name="weather_code_53">Умеренная морось</string>
+    <string name="weather_code_55">Интенсивная морось</string>
+    <string name="weather_code_56">Замерзающая морось слабой интенсивности</string>
+    <string name="weather_code_57">Замерзающая морось плотной интенсивности</string>
+    <string name="weather_code_61">Слабый дождь</string>
+    <string name="weather_code_63">Умеренный дождь</string>
+    <string name="weather_code_65">Сильный дождь</string>
+    <string name="weather_code_66">Замерзающий дождь слабой интенсивности</string>
+    <string name="weather_code_67">Замерзающий дождь сильной интенсивности</string>
+    <string name="weather_code_71">Слабый снегопад</string>
+    <string name="weather_code_73">Умеренный снегопад</string>
+    <string name="weather_code_75">Сильный снегопад</string>
+    <string name="weather_code_77">Снежные зёрна</string>
+    <string name="weather_code_80">Слабые ливневые дожди</string>
+    <string name="weather_code_81">Умеренные ливневые дожди</string>
+    <string name="weather_code_82">Сильные ливневые дожди</string>
+    <string name="weather_code_85">Слабые снежные ливни</string>
+    <string name="weather_code_86">Сильные снежные ливни</string>
+    <string name="weather_code_95">Слабая или умеренная гроза</string>
+    <string name="weather_code_96">Гроза с небольшим градом</string>
+    <string name="weather_code_99">Гроза с сильным градом</string>
+    <string name="weather_code_unknown">Неизвестный погодный код</string>
+    <!-- Weather codes end -->
 
 </resources>

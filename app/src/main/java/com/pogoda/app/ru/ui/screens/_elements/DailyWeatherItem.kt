@@ -21,12 +21,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.pogoda.app.ru.R
+import com.pogoda.app.ru.model.weather.DailyWeatherInfo
 import com.pogoda.app.ru.ui.theme.InterfaceBlockColor
 import com.pogoda.app.ru.utils.MAX_WEIGHT
+import com.pogoda.app.ru.utils.ZERO
 
 @Composable
-fun DailyWeatherItem() {
+fun DailyWeatherItem(
+    dailyWeather: DailyWeatherInfo,
+    index: Int
+) {
     Surface(
         color = InterfaceBlockColor,
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.card_rounded_corner))
@@ -44,12 +50,15 @@ fun DailyWeatherItem() {
                 modifier = Modifier.weight(Float.MAX_WEIGHT)
             ) {
                 Text(
-                    text = "Сегодня",
+                    text = if (index == Int.ZERO)
+                        stringResource(id = R.string.button_today) else dailyWeather.date,
                     fontWeight = FontWeight.SemiBold,
+                    fontSize = dimensionResource(id = R.dimen.daily_weather_item_date_font_size).value.sp,
                     textAlign = TextAlign.Start
                 )
                 Text(
-                    text = "Солнечно",
+                    text = dailyWeather.description,
+                    fontSize = dimensionResource(id = R.dimen.daily_weather_item_description_font_size).value.sp,
                     textAlign = TextAlign.Start
                 )
             }
@@ -62,11 +71,11 @@ fun DailyWeatherItem() {
                     verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacer_10))
                 ) {
                     Text(
-                        text = "3" + stringResource(id = R.string.degree),
+                        text = dailyWeather.temperature,
                         textAlign = TextAlign.End
                     )
                     Text(
-                        text = "-2" + stringResource(id = R.string.degree),
+                        text = dailyWeather.apparentTemperature,
                         textAlign = TextAlign.End
                     )
                 }
@@ -76,7 +85,7 @@ fun DailyWeatherItem() {
                 )
             }
             Icon(
-                painter = painterResource(id = R.drawable.weather_02),
+                painter = painterResource(id = dailyWeather.icon),
                 contentDescription = stringResource(id = R.string.weather_icon_content_description),
                 tint = Color.Unspecified,
                 modifier = Modifier

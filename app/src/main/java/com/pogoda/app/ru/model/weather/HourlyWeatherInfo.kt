@@ -6,5 +6,7 @@ import com.pogoda.app.ru.utils.ZERO
 data class HourlyWeatherInfo(
     val time: String = String.EMPTY,
     val icon: Int = Int.ZERO,
-    val temp: String = String.EMPTY
+    val temperature: String = String.EMPTY,
+    val precipitationProbability: Int = Int.ZERO,
+    val probabilityUnit: String = String.EMPTY
 )
