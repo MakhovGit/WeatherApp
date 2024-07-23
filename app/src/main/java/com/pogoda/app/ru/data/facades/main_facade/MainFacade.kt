@@ -21,7 +21,7 @@ class MainFacade(
     private val networkInteractor: NetworkInteractor,
     private val locationInteractor: LocationInteractor
 ) {
-    private val _outFlow: MutableSharedFlow<MainFacadeMessages> =
+    private val _outFlow: MutableSharedFlow<MainFacadeMessage> =
         MutableSharedFlow(replay = Int.ONE)
     val outFlow = _outFlow.asSharedFlow()
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, error ->
@@ -55,7 +55,7 @@ class MainFacade(
                     is NetworkInteractorMessages.RequestWeather.Success -> {
                         Log.d(MAIN_LOG_TAG, "MainFacade: requestWeather() success!")
                         _outFlow.emit(
-                            MainFacadeMessages.RequestWeather.Success(
+                            MainFacadeMessage.RequestWeather.Success(
                                 weather = message.weather
                             )
                         )
@@ -64,8 +64,8 @@ class MainFacade(
                     is NetworkInteractorMessages.RequestWeather.Failure -> {
                         Log.e(MAIN_LOG_TAG, "MainFacade: requestWeather() failed!")
                         _outFlow.emit(
-                            MainFacadeMessages.RequestWeather.Failure(
-                                error = MainFacadeMessages.RequestWeatherErrors.RequestError()
+                            MainFacadeMessage.RequestWeather.Failure(
+                                error = MainFacadeMessage.RequestWeatherError.RequestFailure()
                             )
                         )
                     }
@@ -76,7 +76,7 @@ class MainFacade(
                         Log.d(MAIN_LOG_TAG, "MainFacade: requestPlaces() success!")
                         if (message.places.places.size > Int.ZERO) {
                             _outFlow.emit(
-                                MainFacadeMessages.RequestPlaces.Success(
+                                MainFacadeMessage.RequestPlaces.Success(
                                     places = message.places
                                 )
                             )
@@ -86,8 +86,8 @@ class MainFacade(
                     is NetworkInteractorMessages.RequestPlaces.Failure -> {
                         Log.e(MAIN_LOG_TAG, "MainFacade: requestPlaces() failed!")
                         _outFlow.emit(
-                            MainFacadeMessages.RequestPlaces.Failure(
-                                error = MainFacadeMessages.RequestPlacesErrors.RequestError()
+                            MainFacadeMessage.RequestPlaces.Failure(
+                                error = MainFacadeMessage.RequestPlacesError.RequestFailure()
                             )
                         )
                     }
@@ -110,8 +110,20 @@ class MainFacade(
                     is LocationInteractorMessages.RequestLocation.Failure -> {
                         Log.e(MAIN_LOG_TAG, "MainFacade: requestLocation() failed!")
                         _outFlow.emit(
-                            MainFacadeMessages.RequestWeather.Failure(
-                                error = MainFacadeMessages.RequestWeatherErrors.LocatingError()
+                            MainFacadeMessage.RequestWeather.Failure(
+                                error = when (message.error) {
+                                    is LocationInteractorMessages.RequestLocationError.GooglePlayServicesNotAvailable ->
+                                        MainFacadeMessage.RequestWeatherError.GooglePlayServicesNotAvailable()
+
+                                    is LocationInteractorMessages.RequestLocationError.LocationPermissionsNotGranted ->
+                                        MainFacadeMessage.RequestWeatherError.LocationPermissionsNotGranted()
+
+                                    is LocationInteractorMessages.RequestLocationError.RequestLocationFailed ->
+                                        MainFacadeMessage.RequestWeatherError.LocationFailure()
+
+                                    is LocationInteractorMessages.RequestLocationError.CurrentLocationIsNull ->
+                                        MainFacadeMessage.RequestWeatherError.LocationIsNull()
+                                }
                             )
                         )
                     }
@@ -142,7 +154,7 @@ class MainFacade(
         requestPlacesJob?.cancel()
         requestPlacesJob = mainScope.launch {
             Log.d(MAIN_LOG_TAG, "MainFacade: requestPlaces() launched!")
-            _outFlow.emit(MainFacadeMessages.RequestPlaces.Processing)
+            _outFlow.emit(MainFacadeMessage.RequestPlaces.Processing)
             networkInteractor.requestPlaces(name, PLACES_COUNT, LANGUAGE, FORMAT)
         }
     }
@@ -151,7 +163,7 @@ class MainFacade(
         erasePlacesJob?.cancel()
         erasePlacesJob = mainScope.launch {
             Log.d(MAIN_LOG_TAG, "MainFacade: erasePlaces() launched!")
-            _outFlow.emit(MainFacadeMessages.RequestPlaces.ErasePlaces)
+            _outFlow.emit(MainFacadeMessage.RequestPlaces.ErasePlaces)
         }
     }
 
@@ -160,7 +172,7 @@ class MainFacade(
             requestWeatherJob?.cancel()
             requestWeatherJob = mainScope.launch {
                 Log.d(MAIN_LOG_TAG, "MainFacade: requestWeather() launched!")
-                _outFlow.emit(MainFacadeMessages.RequestWeather.Processing)
+                _outFlow.emit(MainFacadeMessage.RequestWeather.Processing)
                 locationInteractor.requestLocation()
             }
         }
@@ -171,7 +183,7 @@ class MainFacade(
         requestWeatherWithParamsJob?.cancel()
         requestWeatherWithParamsJob = mainScope.launch {
             Log.d(MAIN_LOG_TAG, "MainFacade: requestWeatherWithParams() launched!")
-            _outFlow.emit(MainFacadeMessages.RequestWeather.Processing)
+            _outFlow.emit(MainFacadeMessage.RequestWeather.Processing)
             networkInteractor.requestWeather(latitude, longitude, placeName)
         }
     }
@@ -180,7 +192,7 @@ class MainFacade(
         eraseMessageJob?.cancel()
         eraseMessageJob = mainScope.launch {
             Log.d(MAIN_LOG_TAG, "MainFacade: eraseMessage() launched!")
-            _outFlow.emit(MainFacadeMessages.EraseMessage)
+            _outFlow.emit(MainFacadeMessage.EraseMessage)
         }
     }
 

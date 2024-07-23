@@ -1,7 +1,7 @@
 package com.pogoda.app.ru.ui.screens.main_screen
 
 import android.util.Log
-import com.pogoda.app.ru.data.facades.main_facade.MainFacadeMessages
+import com.pogoda.app.ru.data.facades.main_facade.MainFacadeMessage
 import com.pogoda.app.ru.model.places.PlacesInfo
 import com.pogoda.app.ru.settings.MAIN_LOG_TAG
 import com.pogoda.app.ru.utils.EMPTY
@@ -10,10 +10,10 @@ class MainScreenReducer {
 
     private fun onRequestWeather(
         currentState: MainScreenContract.State,
-        result: MainFacadeMessages.RequestWeather
+        result: MainFacadeMessage.RequestWeather
     ): MainScreenContract.State {
         return when (result) {
-            is MainFacadeMessages.RequestWeather.Processing -> {
+            is MainFacadeMessage.RequestWeather.Processing -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestWeather.Processing!")
                 currentState.copy(
                     isWeatherLoading = true,
@@ -22,7 +22,7 @@ class MainScreenReducer {
                 )
             }
 
-            is MainFacadeMessages.RequestWeather.Success -> {
+            is MainFacadeMessage.RequestWeather.Success -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestWeather.Success!")
                 currentState.copy(
                     isWeatherLoading = false,
@@ -32,16 +32,13 @@ class MainScreenReducer {
                 )
             }
 
-            is MainFacadeMessages.RequestWeather.Failure -> {
+            is MainFacadeMessage.RequestWeather.Failure -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestWeather.Failure!")
                 currentState.copy(
                     isWeatherLoading = false,
                     isWeatherLoaded = false,
                     weatherError = result.error,
-                    messageForUser = when (result.error) {
-                        is MainFacadeMessages.RequestWeatherErrors.RequestError -> result.error.message
-                        is MainFacadeMessages.RequestWeatherErrors.LocatingError -> result.error.message
-                    }
+                    messageForUser = result.error.message
                 )
             }
         }
@@ -49,10 +46,10 @@ class MainScreenReducer {
 
     private fun onRequestPlaces(
         currentState: MainScreenContract.State,
-        result: MainFacadeMessages.RequestPlaces
+        result: MainFacadeMessage.RequestPlaces
     ): MainScreenContract.State {
         return when (result) {
-            is MainFacadeMessages.RequestPlaces.Processing -> {
+            is MainFacadeMessage.RequestPlaces.Processing -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestPlaces.Processing!")
                 currentState.copy(
                     isPlacesLoading = true,
@@ -61,7 +58,7 @@ class MainScreenReducer {
                 )
             }
 
-            is MainFacadeMessages.RequestPlaces.Success -> {
+            is MainFacadeMessage.RequestPlaces.Success -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestPlaces.Success!")
                 currentState.copy(
                     isPlacesLoading = false,
@@ -71,19 +68,17 @@ class MainScreenReducer {
                 )
             }
 
-            is MainFacadeMessages.RequestPlaces.Failure -> {
+            is MainFacadeMessage.RequestPlaces.Failure -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestPlaces.Failure!")
                 currentState.copy(
                     isPlacesLoading = false,
                     isPlacesLoaded = false,
                     placesError = result.error,
-                    messageForUser = when (result.error) {
-                        is MainFacadeMessages.RequestPlacesErrors.RequestError -> result.error.message
-                    }
+                    messageForUser = result.error.message
                 )
             }
 
-            is MainFacadeMessages.RequestPlaces.ErasePlaces -> {
+            is MainFacadeMessage.RequestPlaces.ErasePlaces -> {
                 Log.d(MAIN_LOG_TAG, "Reducer: RequestPlaces.ErasePlaces!")
                 currentState.copy(
                     isPlacesLoading = false,
@@ -103,18 +98,18 @@ class MainScreenReducer {
 
     fun reduce(
         currentState: MainScreenContract.State,
-        result: MainFacadeMessages
+        result: MainFacadeMessage
     ): MainScreenContract.State {
         return when (result) {
-            is MainFacadeMessages.RequestWeather -> onRequestWeather(currentState, result)
-            is MainFacadeMessages.RequestPlaces -> onRequestPlaces(currentState, result)
-            is MainFacadeMessages.EraseMessage -> onEraseMessage(currentState)
+            is MainFacadeMessage.RequestWeather -> onRequestWeather(currentState, result)
+            is MainFacadeMessage.RequestPlaces -> onRequestPlaces(currentState, result)
+            is MainFacadeMessage.EraseMessage -> onEraseMessage(currentState)
             else -> throw RuntimeException(getErrorMessage(result))
         }
     }
 
     companion object {
         private const val ERROR_MESSAGE = "Invalid event type! Don't know, how reduce this: "
-        private fun getErrorMessage(message: MainFacadeMessages) = "$ERROR_MESSAGE $message"
+        private fun getErrorMessage(message: MainFacadeMessage) = "$ERROR_MESSAGE $message"
     }
 }

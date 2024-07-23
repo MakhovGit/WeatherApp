@@ -3,6 +3,7 @@ package com.pogoda.app.ru.data.interactors.location_interactor
 sealed interface LocationInteractorMessages {
 
     sealed class RequestLocationError {
+        data object GooglePlayServicesNotAvailable : RequestLocationError()
         data object LocationPermissionsNotGranted : RequestLocationError()
         data object CurrentLocationIsNull : RequestLocationError()
         data object RequestLocationFailed : RequestLocationError()

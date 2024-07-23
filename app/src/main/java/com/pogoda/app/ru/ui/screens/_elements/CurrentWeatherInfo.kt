@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +44,7 @@ fun CurrentWeatherInfo(
             ) {
                 Text(
                     text = currentWeather.temperature,
+                    textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                     fontSize = dimensionResource(id = R.dimen.current_weather_info_temp_font_size).value.sp,
                     modifier = Modifier.alignByBaseline()
@@ -50,16 +52,23 @@ fun CurrentWeatherInfo(
                 Text(
                     text = stringResource(id = R.string.current_weather_info_apparent) + String.SPACE +
                             currentWeather.apparentTemperature,
+                    textAlign = TextAlign.Center,
+                    fontSize = dimensionResource(id = R.dimen.current_weather_info_apparent_font_size).value.sp,
                     modifier = Modifier
-                        .alignByBaseline()
                         .weight(Float.MAX_WEIGHT)
+                        .alignByBaseline()
                 )
-                Icon(
-                    painter = painterResource(currentWeather.icon),
-                    contentDescription = stringResource(id = R.string.weather_icon_content_description),
-                    tint = Color.Unspecified,
+                Box(
+                    contentAlignment = Alignment.BottomCenter,
                     modifier = Modifier.alignByBaseline()
-                )
+                ) {
+                    Icon(
+                        painter = painterResource(currentWeather.icon),
+                        contentDescription = stringResource(id = R.string.weather_icon_content_description),
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(dimensionResource(id = R.dimen.current_weather_info_icon_size))
+                    )
+                }
             }
         }
     }

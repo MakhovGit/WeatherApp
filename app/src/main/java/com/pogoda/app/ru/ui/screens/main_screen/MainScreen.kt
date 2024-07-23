@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import com.pogoda.app.ru.R
 import com.pogoda.app.ru.ui.screens._elements.CurrentWeatherInfo
 import com.pogoda.app.ru.ui.screens._elements.DailyWeatherInfo
@@ -133,12 +134,13 @@ fun MainScreen() {
                                     VerticalSpacer(dimensionResource(id = R.dimen.spacer_10))
                                     Row(
                                         horizontalArrangement = Arrangement.spacedBy(
-                                            dimensionResource(id = R.dimen.spacer_20)
+                                            dimensionResource(id = R.dimen.spacer_10)
                                         )
                                     ) {
                                         SimpleButton(
                                             modifier = Modifier.weight(Float.MAX_WEIGHT),
                                             text = stringResource(id = R.string.button_today),
+                                            fontSize = dimensionResource(id = R.dimen.main_screen_button_font_size).value.sp,
                                             isPressed = isTodayButtonPressed
                                         ) {
                                             isTodayButtonPressed = true
@@ -148,6 +150,7 @@ fun MainScreen() {
                                         SimpleButton(
                                             modifier = Modifier.weight(Float.MAX_WEIGHT),
                                             text = stringResource(id = R.string.button_tomorrow),
+                                            fontSize = dimensionResource(id = R.dimen.main_screen_button_font_size).value.sp,
                                             isPressed = isTomorrowButtonPressed
                                         ) {
                                             isTodayButtonPressed = false
@@ -157,6 +160,7 @@ fun MainScreen() {
                                         SimpleButton(
                                             modifier = Modifier.weight(Float.MAX_WEIGHT),
                                             text = stringResource(id = R.string.button_10days),
+                                            fontSize = dimensionResource(id = R.dimen.main_screen_button_font_size).value.sp,
                                             isPressed = is10daysButtonPressed
                                         ) {
                                             isTodayButtonPressed = false

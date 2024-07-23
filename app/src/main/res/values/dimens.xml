@@ -12,6 +12,7 @@
 
     <!-- MainScreen begin -->
     <dimen name="main_screen_search_elevation">10dp</dimen>
+    <dimen name="main_screen_button_font_size">11sp</dimen>
     <!-- MainScreen end -->
 
     <!-- DailyWeatherItem begin -->
@@ -35,6 +36,8 @@
     <!-- CurrentWeatherInfo begin -->
     <dimen name="current_weather_info_place_font_size">17sp</dimen>
     <dimen name="current_weather_info_temp_font_size">50sp</dimen>
+    <dimen name="current_weather_info_apparent_font_size">13sp</dimen>
+    <dimen name="current_weather_info_icon_size">65dp</dimen>
     <!-- CurrentWeatherInfo end -->
 
     <!-- PrecipitationInfo begin -->

@@ -10,6 +10,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -47,6 +48,10 @@ class LocationInteractor(
     private val locationPriority = Priority.PRIORITY_BALANCED_POWER_ACCURACY
     private val cancellationTokenSource = CancellationTokenSource()
     private val geocoder = Geocoder(app, Locale.getDefault())
+
+    private fun isGooglePlayServicesAvailable(app: Application) =
+        GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(app) ==
+                com.google.android.gms.common.ConnectionResult.SUCCESS
 
     private fun isLocationPermissionGranted(context: Context) =
         ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) ==
@@ -98,6 +103,19 @@ class LocationInteractor(
         }
     }
 
+    private suspend fun onGooglePlayServicesNotAvailable() {
+        Log.e(
+            MAIN_LOG_TAG,
+            "LocationInteractor: requestLocation() failed! Google Play services not available!"
+        )
+        _outFlow.emit(
+            LocationInteractorMessages.RequestLocation.Failure(
+                error = LocationInteractorMessages
+                    .RequestLocationError.GooglePlayServicesNotAvailable
+            )
+        )
+    }
+
     private suspend fun onLocationPermissionNotGranted() {
         Log.e(
             MAIN_LOG_TAG,
@@ -129,6 +147,7 @@ class LocationInteractor(
             .addOnCompleteListener {
                 Log.d(MAIN_LOG_TAG, "LocationInteractor: requestLocation() completed!")
             }
+
     }
 
     private suspend fun onAddressesNull(latitude: Double, longitude: Double) {
@@ -162,16 +181,24 @@ class LocationInteractor(
         )
     }
 
+    private suspend fun checkPermissions() {
+        if (isLocationPermissionGranted(app)) {
+            getCurrentLocation()
+        } else {
+            onLocationPermissionNotGranted()
+        }
+    }
+
     @SuppressLint("MissingPermission")
     fun requestLocation() {
         requestLocationJob?.cancel()
         requestLocationJob = mainScope.launch {
             Log.d(MAIN_LOG_TAG, "LocationInteractor: requestLocation() launched!")
             _outFlow.emit(LocationInteractorMessages.RequestLocation.Processing)
-            if (isLocationPermissionGranted(app)) {
-                getCurrentLocation()
+            if (isGooglePlayServicesAvailable(app)) {
+                checkPermissions()
             } else {
-                onLocationPermissionNotGranted()
+                onGooglePlayServicesNotAvailable()
             }
         }
     }
