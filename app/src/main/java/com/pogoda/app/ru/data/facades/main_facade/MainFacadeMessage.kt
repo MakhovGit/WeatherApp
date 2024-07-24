@@ -5,32 +5,20 @@ import com.pogoda.app.ru.model.weather.WeatherInfo
 
 sealed interface MainFacadeMessage {
 
-    sealed class RequestWeatherError : MainFacadeError {
-        data class GooglePlayServicesNotAvailable(
-            override val message: String = "Ошибка! Google Play Services недоступны на устройстве!"
-        ) : RequestWeatherError()
+    sealed class RequestWeatherError {
+        data object GooglePlayServicesNotAvailable : RequestWeatherError()
 
-        data class LocationPermissionsNotGranted(
-            override val message: String = "Ошибка! Нет разрешений на определение местоположения!"
-        ) : RequestWeatherError()
+        data object LocationPermissionsNotGranted : RequestWeatherError()
 
-        data class LocationFailure(
-            override val message: String = "Ошибка! Невозможно определить текущие координаты!"
-        ) : RequestWeatherError()
+        data object LocationFailure : RequestWeatherError()
 
-        data class LocationIsNull(
-            override val message: String = "Ошибка! Текущие координаты неверны!"
-        ) : RequestWeatherError()
+        data object LocationIsNull : RequestWeatherError()
 
-        data class RequestFailure(
-            override val message: String = "Ошибка! Невозможно запросить прогноз!"
-        ) : RequestWeatherError()
+        data object RequestFailure : RequestWeatherError()
     }
 
-    sealed class RequestPlacesError : MainFacadeError {
-        data class RequestFailure(
-            override val message: String = "Ошибка! Невозможно запросить список мест!"
-        ) : RequestPlacesError()
+    sealed class RequestPlacesError {
+        data object RequestFailure : RequestPlacesError()
     }
 
     data object EraseMessage : MainFacadeMessage

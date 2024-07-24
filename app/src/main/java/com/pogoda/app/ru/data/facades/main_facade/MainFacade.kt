@@ -65,7 +65,7 @@ class MainFacade(
                         Log.e(MAIN_LOG_TAG, "MainFacade: requestWeather() failed!")
                         _outFlow.emit(
                             MainFacadeMessage.RequestWeather.Failure(
-                                error = MainFacadeMessage.RequestWeatherError.RequestFailure()
+                                error = MainFacadeMessage.RequestWeatherError.RequestFailure
                             )
                         )
                     }
@@ -87,7 +87,7 @@ class MainFacade(
                         Log.e(MAIN_LOG_TAG, "MainFacade: requestPlaces() failed!")
                         _outFlow.emit(
                             MainFacadeMessage.RequestPlaces.Failure(
-                                error = MainFacadeMessage.RequestPlacesError.RequestFailure()
+                                error = MainFacadeMessage.RequestPlacesError.RequestFailure
                             )
                         )
                     }
@@ -113,16 +113,16 @@ class MainFacade(
                             MainFacadeMessage.RequestWeather.Failure(
                                 error = when (message.error) {
                                     is LocationInteractorMessages.RequestLocationError.GooglePlayServicesNotAvailable ->
-                                        MainFacadeMessage.RequestWeatherError.GooglePlayServicesNotAvailable()
+                                        MainFacadeMessage.RequestWeatherError.GooglePlayServicesNotAvailable
 
                                     is LocationInteractorMessages.RequestLocationError.LocationPermissionsNotGranted ->
-                                        MainFacadeMessage.RequestWeatherError.LocationPermissionsNotGranted()
+                                        MainFacadeMessage.RequestWeatherError.LocationPermissionsNotGranted
 
                                     is LocationInteractorMessages.RequestLocationError.RequestLocationFailed ->
-                                        MainFacadeMessage.RequestWeatherError.LocationFailure()
+                                        MainFacadeMessage.RequestWeatherError.LocationFailure
 
                                     is LocationInteractorMessages.RequestLocationError.CurrentLocationIsNull ->
-                                        MainFacadeMessage.RequestWeatherError.LocationIsNull()
+                                        MainFacadeMessage.RequestWeatherError.LocationIsNull
                                 }
                             )
                         )

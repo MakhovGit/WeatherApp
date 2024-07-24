@@ -1,12 +1,20 @@
 package com.pogoda.app.ru.ui.screens.main_screen
 
+import android.app.Application
 import android.util.Log
+import com.pogoda.app.ru.R
 import com.pogoda.app.ru.data.facades.main_facade.MainFacadeMessage
 import com.pogoda.app.ru.model.places.PlacesInfo
 import com.pogoda.app.ru.settings.MAIN_LOG_TAG
 import com.pogoda.app.ru.utils.EMPTY
+import com.pogoda.app.ru.utils.SPACE
 
-class MainScreenReducer {
+class MainScreenReducer(
+    private val app: Application
+) {
+
+    private fun getErrorMessage(stringRes: Int) =
+        app.getString(R.string.error) + String.SPACE + app.getString(stringRes)
 
     private fun onRequestWeather(
         currentState: MainScreenContract.State,
@@ -38,7 +46,24 @@ class MainScreenReducer {
                     isWeatherLoading = false,
                     isWeatherLoaded = false,
                     weatherError = result.error,
-                    messageForUser = result.error.message
+                    messageForUser = getErrorMessage(
+                        stringRes = when (result.error) {
+                            is MainFacadeMessage.RequestWeatherError.GooglePlayServicesNotAvailable ->
+                                R.string.error_google_play_services_not_available
+
+                            is MainFacadeMessage.RequestWeatherError.LocationPermissionsNotGranted ->
+                                R.string.error_location_permissions_not_granted
+
+                            is MainFacadeMessage.RequestWeatherError.LocationFailure ->
+                                R.string.error_location_failure
+
+                            is MainFacadeMessage.RequestWeatherError.LocationIsNull ->
+                                R.string.error_location_is_null
+
+                            is MainFacadeMessage.RequestWeatherError.RequestFailure ->
+                                R.string.error_weather_request_failure
+                        }
+                    )
                 )
             }
         }
@@ -74,7 +99,12 @@ class MainScreenReducer {
                     isPlacesLoading = false,
                     isPlacesLoaded = false,
                     placesError = result.error,
-                    messageForUser = result.error.message
+                    messageForUser = getErrorMessage(
+                        stringRes = when (result.error) {
+                            is MainFacadeMessage.RequestPlacesError.RequestFailure ->
+                                R.string.error_places_request_failure
+                        }
+                    )
                 )
             }
 
@@ -104,12 +134,6 @@ class MainScreenReducer {
             is MainFacadeMessage.RequestWeather -> onRequestWeather(currentState, result)
             is MainFacadeMessage.RequestPlaces -> onRequestPlaces(currentState, result)
             is MainFacadeMessage.EraseMessage -> onEraseMessage(currentState)
-            else -> throw RuntimeException(getErrorMessage(result))
         }
-    }
-
-    companion object {
-        private const val ERROR_MESSAGE = "Invalid event type! Don't know, how reduce this: "
-        private fun getErrorMessage(message: MainFacadeMessage) = "$ERROR_MESSAGE $message"
     }
 }

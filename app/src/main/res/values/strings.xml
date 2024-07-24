@@ -54,4 +54,14 @@
     <string name="weather_code_unknown">Неизвестный погодный код</string>
     <!-- Weather codes end -->
 
+    <!-- MainFacade error begin -->
+    <string name="error">Ошибка!</string>
+    <string name="error_google_play_services_not_available">Google Play Services недоступны на устройстве!</string>
+    <string name="error_location_permissions_not_granted">Нет разрешений на определение местоположения!</string>
+    <string name="error_location_failure">Невозможно определить текущие координаты!</string>
+    <string name="error_location_is_null">Текущие координаты неверны!</string>
+    <string name="error_weather_request_failure">Невозможно запросить прогноз!</string>
+    <string name="error_places_request_failure">Невозможно запросить список мест!</string>
+    <!-- MainFacade error end -->
+
 </resources>

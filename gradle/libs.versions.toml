@@ -5,8 +5,8 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.3"
-activityCompose = "1.9.0"
+lifecycleRuntimeKtx = "2.8.4"
+activityCompose = "1.9.1"
 composeBom = "2024.06.00"
 koin-bom = "3.5.6"
 play-services = "21.3.0"
@@ -33,8 +33,8 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin-bom
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin-bom" }
 koin-coroutines = { group = "io.insert-koin", name = "koin-core-coroutines", version.ref = "koin-bom" }
 google-play-services = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"}
-converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit"}
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
