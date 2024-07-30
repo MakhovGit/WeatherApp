@@ -4,6 +4,7 @@ Stay ahead of the weather with this intuitive app, providing current day forecas
 ### Technologies used:
 - Kotlin
 - MVI
+- Kotlin Flow
 - Jetpack Compose
 - Coroutines
 - Koin
